@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  contact:
+    build: backend
+    ports:
+      - 8000:8080
+    environment:
+      - VERSION=docker_compose
+      - DB_USER=postgres
+      - DB_PASS=password
+      - DB_HOST=database
+      - DB_NAME=contact
+    links:
+      - database
+  database:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=contact
+
